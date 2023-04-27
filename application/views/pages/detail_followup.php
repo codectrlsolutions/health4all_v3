@@ -162,6 +162,28 @@ load: function(query, callback) {
 			}
 			});
 
+
+			$('select[name="route_primary"]').on('change', function() {
+            var primaryId = $(this).val();
+			
+            if(primaryId) {
+                $.ajax({
+					
+                    url: '<?php echo base_url('register/getRouteSecondaryList');?>/'+primaryId,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+						alert(data);
+                        $('select[name="route_secondary"]').empty();
+                        $.each(data, function(key, value) {
+                            $('select[name="route_secondary"]').append('<option value="'+ value.id +'">'+ value.route_secondary +'</option>');
+                        });
+                    }
+                });
+            }else{
+                $('select[name="route_secondary"]').empty();
+            }
+        });
 		 });
       </script>
 <?php
@@ -407,7 +429,8 @@ echo ">".$primary->route_primary."</option>";
 								<label class="control-label">Secondary Route</label>
 								<select class="form-control" name="route_secondary" >
 									<option value="Select">Select</option>
-									<?php foreach($route_primary as $primary_one){
+									<?php 
+									
 									 foreach($route_secondary as $secondary){
 									if($patient_followup->route_primary_id==$secondary->route_primary_id)
 									//
@@ -420,7 +443,7 @@ echo ">".$secondary->route_secondary."</option>";
 									
 									
 									}
-								}
+								
 									?> 
 								</select>							
 							</div>

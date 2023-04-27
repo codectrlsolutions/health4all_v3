@@ -1031,7 +1031,10 @@ class Register extends CI_Controller {
             die();
         }
 	}
-
+	public function getRouteSecondaryList($id) { 
+		$secondary = $this->db->where("route_primary_id",$id)->get("route_secondary")->result();
+		echo json_encode($secondary);
+	}
 	
 	public function patient_follow_up()
 	{
