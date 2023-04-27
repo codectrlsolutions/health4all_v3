@@ -173,7 +173,6 @@ load: function(query, callback) {
                     type: "GET",
                     dataType: "json",
                     success:function(data) {
-						alert(data);
                         $('select[name="route_secondary"]').empty();
                         $.each(data, function(key, value) {
                             $('select[name="route_secondary"]').append('<option value="'+ value.id +'">'+ value.route_secondary +'</option>');
